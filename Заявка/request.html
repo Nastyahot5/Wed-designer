@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Neutral+Face&display=swap" rel="stylesheet">
+    <link href="./css/main.css" rel="stylesheet">
+    <title>Заявка</title>
+        <!-- Стандартный favicon -->
+  <link rel="icon" href="../assets/Logo/favicon.ico" type="image/x-icon">
+  
+  <!-- Для Retina-экранов (опционально) -->
+  <link rel="icon" href="../assets/Logo/favicon-32x32.png" sizes="32x32">
+  
+  <!-- Для Apple-устройств (Safari) -->
+  <link rel="apple-touch-icon" href="../assets/Logo/apple-touch-icon.png">
+  
+  <!-- Для Android/Chrome -->
+  <link rel="manifest" href="../assets/Logo/site.webmanifest">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <!--[if !mso]><!-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!--<![endif]-->
+
+    <meta name="x-apple-disable-message-reformatting" />
+</head>
+<body>
+<div style="margin: auto; width: 1440px; height: 1500px" data-ignore="used only for top most containter width">
+    <div class="button1-container">
+    <a href="../index.html" class="button1">#designer</a>
+    </div>
+    <div class="v45_72">
+        <span class="v45_213">и я свяжусь с вами для обсуждения проекта.</span>
+        <span class="v45_241">Оставьте свои контактные данные,</span>
+        <span class="v49_2">Имя</span>
+        <div class="v153_130"><div class="v45_221"></div>
+            <span class="v45_214">Имя</span>
+            <div class="v45_229"></div>
+            <span class="v49_3">Телефон</span>
+        </div>
+        <div class="v45_235">
+            <div class="v45_236"></div>
+            <span class="v45_237">Комментарий</span>
+    </div>
+        <!-- Единая форма для всех данных -->
+        <form id="contactForm" action="https://formspree.io/f/mrbqnnlz" method="POST">
+            <!-- Скрытые поля для кастомизации письма -->
+            <input type="hidden" name="_subject" value="Новая заявка с сайта">
+            <input type="hidden" name="_language" value="ru">
+            <!-- Поле имени -->
+            <div class="v45_220">
+                <label for="username"></label>
+                <input 
+                    type="text" 
+                    id="username" 
+                    class="text-input" 
+                    name="username" 
+                    placeholder="Ирина Ивановна"
+                    required>
+            </div>
+
+            <!-- Поле телефона -->
+            <div class="v45_232">
+                <label for="number"></label>
+                <input 
+                    type="tel" 
+                    id="number" 
+                    class="text-input1" 
+                    name="number" 
+                    placeholder="+75206413131"
+                    required>
+            </div>
+
+            <!-- Выбор способа связи -->
+            <div class="v45_250">
+                <span class="v45_243">КАК с вами лучше связаться?</span>
+
+            </div>
+
+            <!-- Поле сообщения -->
+            <div class="v45_239">
+                <label for="message"></label>
+                    <textarea 
+                        type="tel" 
+                        id="message" 
+                        class="multiline-input" 
+                        rows="11" 
+                        placeholder="Здравствуйте, мне необходим дизайн для проекта..."
+                        name="message"required></textarea>
+            </div>
+            <span class="v67_104">Позвонить
+                <label class="radio-label">
+                    <input type="radio" name="contact_method" value="phone" class="radio-input" checked>
+                    <span class="radio-custom"></span>
+                    <span class="radio-text"></span>
+                  </label>
+            </span>
+            <span class="v67_133">Через телеграм
+                <label class="radio-label">
+                    <input type="radio" name="contact_method" value="telegram" class="radio-input">
+                    <span class="radio-custom"></span>
+                    <span class="radio-text"></span>
+                  </label>
+            </span>
+            <div class="radio-group">
+                
+              </div>
+            <!-- Кнопка отправки -->
+            <div>
+                <button type="submit" class="redirect-button">ОБСУДИТЬ ПРОЕКТ</button>
+            </div>
+        </form>
+    </div>
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const form = e.target;
+            const button = form.querySelector('button[type="submit"]');
+            const originalText = button.textContent;
+            
+            // Показываем статус отправки
+            button.textContent = '     Отправка...';
+            button.disabled = true;
+            
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: new FormData(form),
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    alert('Спасибо! Ваша заявка отправлена. Я свяжусь с вами в ближайшее время.');
+                    form.reset();
+                } else {
+                    throw new Error('Ошибка сервера');
+                }
+            } catch (error) {
+                alert('Произошла ошибка при отправке. Пожалуйста, попробуйте еще раз или свяжитесь со мной другим способом.');
+                console.error('Ошибка:', error);
+            } finally {
+                button.textContent = originalText;
+                button.disabled = false;
+            }
+        });
+        </script>
+</div>
+</body>
+</html>
